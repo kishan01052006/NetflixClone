@@ -2,21 +2,34 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
-
+import Loader from "../loader";
 
 const JWT_TOKEN = Cookies.get("jwt_token");
 
 const BannerCarousel = () => {
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true); // ✅ new
 
   const fetchBannerMovies = async () => {
-    const response = await fetch("https://apis.ccbp.in/movies-app/trending-movies", {
-      headers: {
-        Authorization: `Bearer ${JWT_TOKEN}`,
-      },
-    });
-    const data = await response.json();
-    setMovies(data.results || []);
+    try {
+      setLoading(true);
+      const response = await fetch("https://apis.ccbp.in/movies-app/trending-movies", {
+        headers: {
+          Authorization: `Bearer ${JWT_TOKEN}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setMovies(data.results || []);
+      } else {
+        console.error("Failed to fetch banner movies");
+      }
+    } catch (error) {
+      console.error("Error fetching banners:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -34,11 +47,19 @@ const BannerCarousel = () => {
     arrows: false,
   };
 
+  // ✅ show loader only while fetching
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-[605px] bg-black">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <div className="w-screen h-[605px] relative">
       <Slider {...settings} className="h-full">
         {movies.map((movie) => (
-          
           <div key={movie.id} className="h-[605px] relative">
             <img
               src={movie.backdrop_path}
@@ -52,10 +73,10 @@ const BannerCarousel = () => {
                   ? movie.overview.substring(0, 150) + "..."
                   : movie.overview}
               </p>
-              <Link to={`/movies/${movie.id}`} key={movie.id}>
-              <button className="bg-white text-black font-semibold px-6 py-2 rounded hover:bg-gray-300 transition w-[170px] cursor-pointer">
-                Play
-              </button>
+              <Link to={`/movies/${movie.id}`}>
+                <button className="bg-white text-black font-semibold px-6 py-2 rounded hover:bg-gray-300 transition w-[170px] cursor-pointer">
+                  Play
+                </button>
               </Link>
             </div>
           </div>
