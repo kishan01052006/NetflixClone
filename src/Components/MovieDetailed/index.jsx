@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import Loader from "../loader"; // import your loader component
+import Loader from "../loader"; 
 
 const Details = ({ value }) => {
-  // Show loader if data isn't ready
   if (!value || Object.keys(value).length === 0) {
     return <Loader />;
   }
@@ -12,10 +11,10 @@ const Details = ({ value }) => {
   return (
     <div>
       <div
-        className="h-[765px] w-full bg-cover"
+        className="h-[605px] w-full bg-cover"
         style={{ backgroundImage: `url(${backdrop_path})` }}
       >
-        <div className="inset-0 bg-gradient-to-r from-black/50 via-black/50 to-transparent flex flex-col justify-center pt-70 pl-30 h-[765px]">
+        <div className="inset-0 bg-gradient-to-r from-black/50 via-black/50 to-transparent flex flex-col justify-center pt-30 pl-30 h-[765px]">
           <h1 className="text-white text-4xl font-bold mb-6">{title}</h1>
           <p className="text-white text-lg max-w-xl mb-6">
             {overview?.length > 150 ? overview.substring(0, 150) + "..." : overview}
@@ -69,13 +68,15 @@ const Details = ({ value }) => {
 
         <div className="flex flex-wrap">
           {similar_movies?.map((each) => (
-            <Link to={`/movies/${each.id}`} key={each.id}>
+            <div className="m-4">
+            <Link to={`/movies/${each.id}`} reloadDocument key={each.id}>
               <img
                 src={each.backdrop_path}
-                className="text-[#FFFFFF] text-[16px] mt-5 w-[255px] mr-9"
+                className="text-[#FFFFFF] text-[16px] w-[255px]"
                 alt={each.title}
               />
             </Link>
+            </div>
           ))}
         </div>
       </div>

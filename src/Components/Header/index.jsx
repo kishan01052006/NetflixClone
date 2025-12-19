@@ -19,12 +19,13 @@ const Header=()=>{
   }
     return (
     <div className="bg-[#000000] flex justify-between w-screen items-center p-3 px-5">
-      <Link to={"/"}>
+      <Link to="/" reloadDocument>
         <h1 className=" text-4xl font-extrabold text-red-600">MOVIES</h1>
       </Link>
-      <div className="flex justify-between w-[15%]">
-        <Link to="/"><h3 className="text-white">Home</h3></Link>
-        <Link to="/popular"><h3 className="text-white">Popular</h3></Link>
+      <div className="flex justify-between w-[15%] m-0">
+        <Link to="/" reloadDocument><h3 className="text-white mr-25">Home</h3></Link>
+        <Link to="/popular" reloadDocument><h3 className="text-white  mr-25">Popular</h3></Link>
+        <Link to="/favourites" reloadDocument><h3 className="text-white mr-15">Favouites</h3></Link>
       </div>
       <div className="flex items-center gap-4">
         <form
@@ -64,7 +65,7 @@ const Header=()=>{
             </button>
           </div>
         </form>
-        <Link to="/profile">
+        <Link to="/profile" reloadDocument>
         <img
           src="https://res.cloudinary.com/dvbmbe4cl/image/upload/v1758621716/Avatar_iwrdyl.png"
           className="w-[35px]"

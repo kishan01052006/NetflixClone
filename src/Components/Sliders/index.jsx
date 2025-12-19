@@ -14,23 +14,22 @@ const Slide=(props)=>{
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
+          slidesToScroll: 1,
+         
         }
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          
         }
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1
         }
       }
@@ -41,13 +40,11 @@ const Slide=(props)=>{
       <Slider {...settings}>
        {data?.results?.map((each)=>{
       return(
-    <div className="slider-container">
-      
-      <div>
-        <Link to={`/movies/${each.id}`} key={each.id}>
-        <img src={each.poster_path}  className=" w-[254px] mb-0 "/>
+    <div className="slider-container ml-10 mr-10">
+        <Link to={`/movies/${each.id}`} reloadDocument  key={each.id}>
+        <img src={each.poster_path} className="w-[284px]"/>
         </Link>
-      </div>
+      
       
     </div>
       )

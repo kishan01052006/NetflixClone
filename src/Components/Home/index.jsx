@@ -74,9 +74,11 @@ const HomePage = () => {
 
       <div className="bg-[#000000] w-screen">
         {/* Trending Section */}
-        <div className="pl-12 pt-10 mb-0">
-          <h1 className="text-white text-[24px] font-bold mb-8">Trending Now</h1>
-          <Slide data={currentData} />
+        <div className="p-10">
+          <h1 className="text-white text-[24px] font-bold mb-15">Trending Now</h1>
+          
+          <Slide data={currentData}  />
+          
         </div>
 
         {/* Originals Section */}

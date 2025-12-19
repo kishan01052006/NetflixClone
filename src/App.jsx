@@ -1,5 +1,4 @@
 import { Routes,Route,BrowserRouter } from 'react-router-dom'
-import './App.css'
 import ProtectedRoute from './Components/ProtectedRoute'
 import LoginPage from './Components/Login'
 import HomePage from './Components/Home'
@@ -7,6 +6,7 @@ import PopularPage from './Components/Popular'
 import MovieDetils from './Components/MovieItem'
 import Profile from './Components/Profile'
 import PageNotFound from './Components/pageNotFound'
+import Favouites from './Components/Favourites'
 
 function App() {
   return (
@@ -29,10 +29,18 @@ function App() {
           </ProtectedRoute>
         }/>
         <Route path='/profile' element={
+          <ProtectedRoute>
           <Profile/>
+          </ProtectedRoute>
         }>
+          </Route>
+        <Route path='/favourites' element={
+          <ProtectedRoute>
+          <Favouites/>
+          </ProtectedRoute>
+        }></Route>
             
-        </Route>
+        
         <Route path='*' element={
           <PageNotFound/>
         }>
